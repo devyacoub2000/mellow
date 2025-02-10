@@ -20,4 +20,18 @@ class Room extends Model
         ->where('type', 'gallery');
     }
 
+    public function getImgPathAttribute() {
+        $src = asset('images/noo_imagee.jpg');
+        if($this->image) {
+            $src = asset('images/'.$this->image->path);
+        }
+        return $src;
+    }
+
 }
+
+
+
+
+
+

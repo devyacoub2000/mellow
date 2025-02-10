@@ -15,4 +15,13 @@ class Gallery extends Model
         return $this->morphOne(image::class, 'imageable');
     }
 
+
+    public function getImgPathAttribute() {
+        $src = asset('images/noo_imagee.jpg');
+        if($this->image) {
+            $src = asset('gallery/'.$this->image->path);
+        }   
+        return $src;
+    }
+
 }
