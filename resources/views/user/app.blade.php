@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>@yield('title', 'Mellow - Hotel') </title>
+  <title>@yield('title', getSettings('website_name')) </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -190,12 +190,17 @@
     @yield('content')
 
  
-
+    
   <section id="footer">
     <div class="container-fluid padding-side padding-small pt-0" data-aos="fade-up">
       <footer class="row">
         <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-          <img src="{{asset('front/images/main-logo-footer.png')}}" alt="logo-footer" class="img-fluid">
+          @if(getSettings('website_logo'))
+           <img src="{{asset('settings/'.getSettings('website_logo'))}}" 
+           alt="logo-footer" class="img-fluid">
+          @else
+           <img src="{{asset('front/images/main-logo-footer.png')}}" alt="logo-footer" class="img-fluid">
+          @endif
           <p class="mt-3">Welcome to Hotel Mellow, where comfort meets tranquility. Nestled in the heart of a bustling
             city, our
             hotel offers a peaceful retreat for both.</p>
@@ -240,9 +245,12 @@
         <div class="col-md-6 col-lg-3 offset-lg-1 mb-4 mb-lg-0">
           <h4 class="display-6 fw-normal">Join Our Newsletter</h4>
           <p>Sign up to our newsletter to receive latest news.</p>
-          <form class=" position-relative">
-            <input type="text" class="form-control px-4 py-3 bg-transparent mb-3" placeholder="Your Name">
-            <input type="email" class="form-control px-4 py-3 bg-transparent" placeholder="Your email">
+          <form action="{{route('front.store_contact')}}" method="POST" class=" position-relative">
+            @csrf
+            <input type="text" class="form-control px-4 py-3 bg-transparent mb-3" placeholder="Your Name" name="name" value="{{old('name')}}">
+
+            <input type="email" value="{{old('email')}}" class="form-control px-4 py-3 bg-transparent" placeholder="Your email" name="email">
+
             <div class="d-grid">
               <button href="#" class="btn btn-arrow btn-primary mt-3">
                 <span>Subscribe Now<svg width="18" height="18">
@@ -309,7 +317,7 @@
           </ul>
         </div>
         <div class="col-md-6 col-lg-3 offset-lg-1 mb-4 mb-lg-0">
-          <p class="m-0">© Copyright 2024 Hotel Mellow. </p>
+          <p class="m-0">©{{getSettings('copyright')}} </p>
           <p>Free Website Template:<a href="https://templatesjungle.com/" class="text-decoration-underline"
               target="_blank">TemplatesJungle</a><br> Distributed By: <a href="https://themewagon.com" class="text-decoration-underline"
             target="blank">ThemeWagon</a></p>
@@ -317,7 +325,27 @@
       </footer>
     </div>
   </section>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+         <script type="text/javascript">
+              const Toast = Swal.mixin({
+                     toast: true,
+                     position: "top-end",
+                     showConfirmButton: false,
+                     timer: 3000,
+                     timerProgressBar: true,
+                     didOpen: (toast) => {
+                     toast.onmouseenter = Swal.stopTimer;
+                     toast.onmouseleave = Swal.resumeTimer;
+                     }
+                  });
+                   
+               @if(session('msg'))  
+                 Toast.fire({
+                 icon: "success",
+                 title: "{{session('msg')}}"
+               });
+               @endif
+         </script>
   <script src="{{asset('front/js/jquery-1.11.0.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('front/js/bootstrap.bundle.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('front/js/plugins.js')}}"></script>

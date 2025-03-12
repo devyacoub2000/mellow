@@ -20,37 +20,35 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-5 col-xl-4 mt-5 mt-md-0">
-            <form id="form" class="form-group flex-wrap bg-white p-5 rounded-4 ms-md-5">
+            <form action="{{route('front.store_book')}}" id="form" class="form-group flex-wrap bg-white p-5 rounded-4 ms-md-5" method="POST">
+              @csrf
               <h3 class="display-5">Check availability</h3>
               <div class="col-lg-12 my-4">
                 <label class="form-label text-uppercase">Check-In</label>
-                <div class="date position-relative bg-transparent" id="select-arrival-date">
-                  <a href="#" class="position-absolute top-50 end-0 translate-middle-y pe-2 ">
-
-                    <svg class="text-body" width="25" height="25">
-                      <use xlink:href="#calendar"></use>
-                    </svg>
-                  </a>
-                </div>
+                <input type="date" name="check_in" value="{{old('check_in')}}" class="form-control @error('check_in') is-invalid @enderror">
               </div>
               <div class="col-lg-12 my-4">
                 <label class="form-label text-uppercase">Check-Out</label>
-                <div class="date position-relative bg-transparent" id="select-departure-date">
-                  <a href="#" class="position-absolute top-50 end-0 translate-middle-y pe-2 ">
-
-                    <svg class="text-body" width="25" height="25">
-                      <use xlink:href="#calendar"></use>
-                    </svg>
-                  </a>
-                </div>
+                <input type="date" name="check_out" value="{{old('check_out')}}" class="form-control @error('check_out') is-invalid @enderror">
               </div>
               <div class="col-lg-12 my-4">
                 <label class="form-label text-uppercase">Rooms</label>
-                <input type="number" value="1" name="quantity" class="form-control text-black-50 ps-3">
+                <select name="room_id" class="form-control">
+                    <option disabled> --- Select Your Room --- </option>
+                    @foreach($room as $item)
+                      <option value="{{$item->id}}"> {{$item->title}}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="col-lg-12 my-4">
                 <label class="form-label text-uppercase">Guests</label>
-                <input type="number" value="1" name="quantity" class="form-control text-black-50 ps-3">
+                <select name="guest" class="form-control">
+                   <option disabled> --- Select Your Guest --- </option>
+                   <option value="1">1</option>
+                   <option value="2">2</option>
+                   <option value="3">3</option>
+                   <option value="4">4</option>
+                </select>
               </div>
               <div class="d-grid">
                 <button href="#" class="btn btn-arrow btn-primary mt-3">

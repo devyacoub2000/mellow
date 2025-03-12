@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
-{
+{   
     use HasFactory;
 
     protected $guarded = [];
@@ -18,6 +18,10 @@ class Room extends Model
     public function gallery() {
         return $this->morphMany(Image::class, 'imageable')
         ->where('type', 'gallery');
+    }
+
+    public function reservations() {
+        return $this->hasMany(Reservation::class);
     }
 
     public function getImgPathAttribute() {

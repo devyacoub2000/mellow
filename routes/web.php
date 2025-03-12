@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 
+Route::post('contact', [FrontController::class, 'store_contact'])->name('front.store_contact');
+Route::post('reservation', [FrontController::class, 'store_book'])->middleware('auth')->name('front.store_book');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

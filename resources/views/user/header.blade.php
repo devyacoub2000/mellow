@@ -6,22 +6,22 @@
             <li class="location text-capitalize d-flex align-items-center me-4" style="font-size: 14px;">
               <svg class="color me-1" width="15" height="15">
                 <use xlink:href="#location"></use>
-              </svg>State Road 54 Trinity, Florida
+              </svg>{{getSettings('location')}}
             </li>
             <li class="phone d-flex align-items-center me-4" style="font-size: 14px;">
               <svg class="color me-1" width="15" height="15">
                 <use xlink:href="#phone"></use>
-              </svg>+666 333 9999
+              </svg>{{getSettings('phone')}}
             </li>
             <li class="time d-flex align-items-center me-4" style="font-size: 14px;">
               <svg class="color me-1" width="15" height="15">
                 <use xlink:href="#email"></use>
-              </svg>yourinfo@yourmail.com
+              </svg>{{getSettings('email')}}
             </li>
           </ul>
           <ul class="social-links d-flex flex-wrap list-unstyled m-0 ">
             <li class="social">
-              <a href="#">
+              <a href="{{getSettings('facebook')}}">
                 <svg class="social" width="16" height="16">
                   <use xlink:href="#facebook"></use>
                 </svg>

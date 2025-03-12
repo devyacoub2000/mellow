@@ -100,7 +100,8 @@ class BlogController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.blog.index')->with('msg', 'Edit Blog Done')
+        return redirect()->route('admin.blog.index')
+        ->with('msg', 'Edit Blog Done')
         ->with('type', 'info');
     }
 
