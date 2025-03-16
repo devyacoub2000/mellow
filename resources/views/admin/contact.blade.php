@@ -23,16 +23,10 @@
       @forelse($data as $item)
  	 <tr>
  	 	<td> {{$loop->iteration}}</td>
- 	 	
-
  	 	<td>{{$item->name}}</td>
  	 	<td>{{$item->email}}</td>
 
- 	 
  	 	<td>
-            
- 	 		
-
  	 		<form class="d-inline" action="{{route('admin.delete_contact', $item->id)}}" method="POST">
  	 			@csrf
  	 			@method('DELETE')
@@ -41,6 +35,10 @@
 
  	 		</form>
  	 		
+ 	 	</td>
+
+ 	 	<td>
+ 	 		<a href="{{route('admin.show_contact', $item->id)}}"> <i class="fas fa-eye"></i></a>
  	 	</td>
  	 </tr>
  	  @empty

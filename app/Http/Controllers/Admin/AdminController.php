@@ -58,6 +58,11 @@ class AdminController extends Controller
          ->with('type', 'danger');
     }
 
+    public function show_contact($id) {
+        $item = Contact::findOrFail($id);
+        return view('admin.show_contact', compact('item'));
+    }
+
     public function profile() {
         $admin = Auth::user();
         return view('admin.profile_data', compact('admin'));

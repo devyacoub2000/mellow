@@ -29,6 +29,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'is_admin')->group(fu
     Route::resource('blog',       BlogController::class);
 
     Route::get('contact', [AdminController::class, 'contact'])->name('contact');
+    Route::get('show_contact/{id}', [AdminController::class, 'show_contact'])->name('show_contact');
     Route::get('reservations', [AdminController::class, 'reservations'])->name('reservations');
     Route::delete('delete_contact/{id}', [AdminController::class, 'delete_contact'])->name('delete_contact');
     Route::delete('delete_reservation/{id}', [AdminController::class, 'delete_reservation'])->name('delete_reservation');
